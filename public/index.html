@@ -1,0 +1,155 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>ARORA ARCHITECTURAL STUDIOS – Project Management System</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4efe6;--card:#fff;--ink:#2b2b2b;--mut:#7b7468;--gold:#b08d57;--line:#e7dfd1;--side:#2b2b2b;--red:#b04a3f;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#1c1c1c;--card:#262626;--ink:#ece6da;--mut:#a39c8f;--line:#3a3a3a;--side:#111}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#1c1c1c;--card:#262626;--ink:#ece6da;--mut:#a39c8f;--line:#3a3a3a;--side:#111}
+*{box-sizing:border-box}body{margin:0;font:14px/1.5 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}
+h1,h2,.brand,.stat b{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600}h1{font-size:32px;margin:0}h2{font-size:22px;margin:18px 0 8px}
+.app{display:flex;min-height:100vh}
+.side{width:224px;background:var(--side);color:#e9e2d4;padding:22px 14px;flex:none;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:4px}
+.brand{font-size:28px;letter-spacing:.2em;color:var(--gold);padding:0 8px 18px}.brand small{display:block;font:500 9px Inter,sans-serif;letter-spacing:.22em;color:#cfc6b4;margin-top:2px}
+.side a{color:inherit;text-decoration:none;padding:9px 12px;border-radius:6px}.side a.on,.side a:hover{background:#3a3a3a;color:var(--gold)}
+.who{margin-top:auto;font-size:12px;color:#a9a294;padding:8px}.who a{padding:0!important;color:var(--gold)!important;display:inline}
+main{flex:1;min-width:0;padding:26px 30px}
+.hd{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:14px}.grid .card{margin:0}
+.stat b{display:block;font-size:36px;color:var(--gold)}.stat span{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.08em}.stat.bad b{color:var(--red)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.bar{height:7px;background:var(--line);border-radius:4px;overflow:hidden;min-width:70px}.bar i{display:block;height:100%;background:var(--gold)}
+.btn{background:var(--gold);color:#fff;border:0;border-radius:6px;padding:8px 14px;cursor:pointer;font:inherit}.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}.btn.red{background:var(--red);color:#fff}.btn.sm{padding:4px 9px;font-size:12px}
+input,select,textarea{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:6px;padding:7px 9px;width:100%}
+.tb{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.tb input,.tb select{width:auto;flex:1;min-width:130px}
+.tw{overflow-x:auto}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:middle}th{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--mut);white-space:nowrap}
+td select,td input{padding:4px 6px;font-size:13px;min-width:125px}
+.badge{padding:2px 9px;border-radius:10px;font-size:11px;background:var(--line);white-space:nowrap}
+.chip{display:inline-block;padding:2px 9px;margin:2px;border-radius:10px;border:1px solid var(--line);font-size:12px}.chip.bad{border-color:var(--red);color:var(--red)}
+.row{padding:6px 0;border-bottom:1px solid var(--line)}.neg{color:var(--red)}small,.mut{color:var(--mut)}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}.info small{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+dialog{border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);width:min(640px,94vw);padding:22px}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:10px}.fg label{font-size:12px;color:var(--mut)}.fg .w{grid-column:1/-1}
+.act{display:flex;gap:8px;margin-top:16px}.act span{flex:1}a{color:var(--gold)}
+.login{max-width:340px;margin:12vh auto;text-align:center;padding:0 16px}.login input{margin:6px 0}
+@media(max-width:800px){.app{flex-direction:column}.side{width:auto;height:auto;position:static;flex-direction:row;flex-wrap:wrap;padding:12px}.brand{width:100%;padding:0 4px 6px}.who{margin:0;width:100%}main{padding:16px}.two,.fg{grid-template-columns:1fr}}
+@media print{.side,.tb,.btn,.noprint{display:none!important}main{padding:0}body{background:#fff;color:#000}}
+</style></head><body><div id="app"></div><dialog id="m"></dialog><datalist id="dl"></datalist>
+<script>
+const K='arora_pms_v1',B='arora_pms_bak';
+const ST=['Not Started','In Progress','Under Review','Revision Required','Approved','Completed'],TY=['Architecture','Interior','Renovation','Commercial','Residential'],PS=['Ongoing','On Hold','Completed'];
+const AR=['Site Plan','Ground Floor Plan','First Floor Plan','Second Floor Plan','Terrace Plan','Elevations','Sections','Staircase Details','Door & Window Details','Toilet Details'];
+const IN=['Furniture Layout','Flooring Layout','False Ceiling Layout','Electrical Layout','Lighting Layout','Plumbing Layout','Wall Elevations','Kitchen Details','Wardrobe Details','Furniture Details','3D Views / Renders'];
+const SC={'Not Started':'#9a9488','In Progress':'#5b7c99','Under Review':'#8d6bb0','Revision Required':'#b04a3f','Approved':'#5d8a5e','Completed':'#3f6b44'};
+const $=s=>document.querySelector(s),E=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const off=n=>{const d=new Date();d.setDate(d.getDate()+n);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+const T=off(0),uid=()=>Math.random().toString(36).slice(2,9),fmt=d=>d?new Date(d+'T00:00:00').toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}):'—';
+const ls=(k,v)=>{try{return v===undefined?localStorage.getItem(k):localStorage.setItem(k,v)}catch(e){}};
+let db,me,F={},cur='dashboard',FM;
+const proj=id=>db.clients.find(c=>c.id==id),tm=id=>(db.team.find(t=>t.id==id)||{}).name||'—',isA=()=>me&&me.role=='Admin';
+const done=d=>d.status=='Approved'||d.status=='Completed',pend=d=>!done(d),over=d=>pend(d)&&d.target&&d.target<T,upc=d=>pend(d)&&d.target>=T&&d.target<=off(14);
+const pr=pid=>{const a=db.drawings.filter(d=>d.pid==pid);return a.length?Math.round(a.filter(done).length*100/a.length):0};
+const bar=p=>`<div style="display:flex;align-items:center;gap:8px"><div class=bar style="flex:1"><i style="width:${p}%"></i></div><small>${p}%</small></div>`;
+const by=k=>(a,b)=>(a[k]||'9').localeCompare(b[k]||'9');
+const op=(o,v)=>o.map(x=>{x=Array.isArray(x)?x:[x,x];return `<option value="${E(x[0])}"${x[0]==v?' selected':''}>${E(x[1])}</option>`}).join('');
+const tO=()=>[['','— Unassigned —'],...db.team.map(t=>[t.id,t.name])];
+function addDr(p){const a=p.type=='Interior'?[]:AR.map(n=>['Architectural Drawings',n]),i=['Interior','Residential','Renovation'].includes(p.type)?IN.map(n=>['Interior Drawings',n]):[];
+ a.concat(i).forEach(x=>db.drawings.push({id:uid(),pid:p.id,cat:x[0],name:x[1],status:'Not Started',team:p.team,start:'',target:'',done:'',rev:'',rem:''}))}
+function seed(){
+ db={team:[{id:'t1',name:'Ananya Arora',role:'Principal Architect',u:'ananya',p:'team123'},{id:'t2',name:'Rohan Mehta',role:'Senior Architect',u:'rohan',p:'team123'},{id:'t3',name:'Kavya Singh',role:'Interior Designer',u:'kavya',p:'team123'},{id:'t4',name:'Imran Khan',role:'Draftsman',u:'imran',p:'team123'}],clients:[],drawings:[]};
+ [['Rajesh Bhandari','98290 11223','rajesh@example.com','Ratanada, Jodhpur','Bhandari Residence','Residential',-60,'t1','Three-storey family home with courtyard.','Ongoing'],
+ ['Meera Joshi','98290 44556','meera@example.com','Paota, Jodhpur','Joshi Villa Interiors','Interior',-40,'t3','Modern minimal interiors, warm palette.','Ongoing'],
+ ['Sharma Hospitality','94140 77889','info@sharmahotels.example','Mehrangarh Road, Jodhpur','Haveli Boutique Hotel','Commercial',-90,'t2','Heritage hotel, 18 rooms.','Ongoing'],
+ ['Vikram Rathore','99280 33445','vikram@example.com','Sardarpura, Jodhpur','Rathore Home Renovation','Renovation',-150,'t4','Ground floor remodel, handed over.','Completed'],
+ ['Neha Kapoor','98870 22110','neha@example.com','Shastri Nagar, Jodhpur','Kapoor Clinic','Architecture',-20,'t2','Small clinic, two floors. Waiting for client approval.','On Hold']]
+ .forEach(c=>{const p={id:uid(),name:c[0],phone:c[1],email:c[2],address:c[3],project:c[4],type:c[5],start:off(c[6]),team:c[7],notes:c[8],status:c[9],updates:[{d:off(-3),t:'Site measurements verified.'}]};db.clients.push(p);addDr(p)});
+ db.drawings.forEach((d,i)=>{const c=proj(d.pid),k=(i*3+c.name.length)%7;
+  if(c.status=='Completed'){d.status='Completed';d.target=off(-40-i%10);d.done=d.target;d.start=off(-100)}
+  else{d.status=['Completed','Approved','In Progress','Under Review','Not Started','Revision Required','In Progress'][k];d.target=off((i*5)%40-12);if(done(d))d.done=off(-(i%9)-1);if(d.status=='Revision Required')d.rev='Client requested dimension changes.';if(d.status!='Not Started')d.start=off(-20)}
+  d.team=db.team[(i+k)%4].id});save()}
+const api=(u,m,b)=>fetch(u,{method:m||'GET',headers:{'Content-Type':'application/json'},body:b===undefined?undefined:JSON.stringify(b)}).then(async r=>{if(!r.ok)throw Object.assign(new Error((await r.json().catch(()=>({}))).error||r.status),{s:r.status});return r.json()});
+const COLS=['clients','drawings','team'];let snap={},Q=Promise.resolve(),busy=0;
+function toast(t){const e=document.createElement('div');e.textContent=t;e.style.cssText='position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#2b2b2b;color:#fff;padding:10px 16px;border-radius:8px;z-index:99';document.body.appendChild(e);setTimeout(()=>e.remove(),4000)}
+function mark(){snap={};COLS.forEach(c=>{snap[c]={};db[c].forEach(x=>snap[c][x.id]=JSON.stringify(x))})}
+function save(){const ops=[];COLS.forEach(c=>{const now={};db[c].forEach(x=>{const j=JSON.stringify(x);now[x.id]=1;if(snap[c][x.id]!==j){ops.push({c,r:x});snap[c][x.id]=j}});Object.keys(snap[c]).forEach(id=>{if(!now[id]){ops.push({c,id,del:1});delete snap[c][id]}})});
+ if(!ops.length)return;busy++;Q=Q.then(()=>api('/api/sync','POST',{ops})).catch(e=>{toast(e.s==403?'You do not have permission for that change.':'Could not save: '+e.message);return load().catch(()=>{me=null;render()})}).finally(()=>busy--)}
+async function load(){const r=await api('/api/db');db={clients:r.clients,drawings:r.drawings,team:r.team};mark();if(r.fresh&&isA())seed();render()}
+async function init(){cur=location.hash.slice(1)||'dashboard';try{me=await api('/api/me');await load()}catch(e){me=null;render()}setInterval(poll,15000)}
+async function poll(){if(!me||!db||busy||$('#m').open)return;const a=document.activeElement;if(a&&/INPUT|SELECT|TEXTAREA/.test(a.tagName))return;
+ try{const r=await api('/api/db'),n={clients:r.clients,drawings:r.drawings,team:r.team};if(JSON.stringify(n)!==JSON.stringify(db)){db=n;mark();render()}}catch(e){if(e.s==401){me=null;render()}}}
+addEventListener('hashchange',()=>{cur=location.hash.slice(1)||'dashboard';render();scrollTo(0,0)});
+async function login(){try{me=await api('/api/login','POST',{u:$('#lu').value.trim(),p:$('#lp').value});await load()}catch(e){me=null;$('#le').textContent=e.s==429?'Too many attempts. Try again in 15 minutes.':'Incorrect username or password.'}}
+async function logout(){await api('/api/logout','POST',{}).catch(()=>{});me=null;db=null;render()}
+function render(){
+ if(!me||!db){$('#app').innerHTML=`<div class=login><div class=brand style="padding:0">ARORA<small>ARCHITECTURAL STUDIOS</small></div><h2>Project Management System</h2><input id=lu placeholder="Username" autocomplete=username><input id=lp type=password placeholder="Password" onkeydown="if(event.key=='Enter')login()"><button class=btn style="width:100%;margin-top:8px" onclick=login()>Sign in</button><p id=le class=neg></p><small>Authorised staff only</small></div>`;return}
+ const nav=[['dashboard','Dashboard'],['clients','Projects & Clients'],['drawings','Drawings'],['team','Team'],['data','Reports & Backup']],v=cur.startsWith('project-')?'clients':cur;
+ $('#dl').innerHTML=[...new Set(db.drawings.map(d=>d.cat))].map(c=>`<option value="${E(c)}">`).join('');
+ $('#app').innerHTML=`<div class=app><nav class=side><div class=brand>ARORA<small>ARCHITECTURAL STUDIOS</small></div>${nav.map(n=>`<a href="#${n[0]}" class="${v==n[0]?'on':''}">${n[1]}</a>`).join('')}<div class=who>${E(me.name)} · ${me.role}<br><a href="#" onclick="logout();return false">Sign out</a></div></nav><main>${cur.startsWith('project-')?vProj(cur.slice(8)):({dashboard:vDash,clients:vClients,drawings:vDraw,team:vTeam,data:vData}[cur]||vDash)()}</main></div>`;
+ if(cur=='clients')fl();if(cur=='drawings')fd();if(cur=='data')rp()}
+function vDash(){const D=db.drawings,cl=db.clients,n=s=>cl.filter(c=>c.status==s).length;
+ const S=[['Total Clients',cl.length],['Ongoing Projects',n('Ongoing')],['Completed Projects',n('Completed')],['Projects On Hold',n('On Hold')],['Pending Drawings',D.filter(pend).length],['Drawings Completed',D.filter(done).length],['Upcoming Deadlines (14 days)',D.filter(upc).length],['Overdue Tasks',D.filter(over).length,1]];
+ const li=d=>`<div class=row><a href="#project-${d.pid}">${E(d.name)}</a> <small>${E(proj(d.pid).project)} · <span class="${over(d)?'neg':''}">${fmt(d.target)}</span></small></div>`,
+ ov=D.filter(over).sort(by('target')).slice(0,8),up=D.filter(upc).sort(by('target')).slice(0,8),tot=D.length?Math.round(D.filter(done).length*100/D.length):0;
+ return `<div class=hd><h1>Dashboard</h1><small>${fmt(T)}</small></div><div class=grid>${S.map(s=>`<div class="card stat ${s[2]&&s[1]?'bad':''}"><b>${s[1]}</b><span>${s[0]}</span></div>`).join('')}</div>
+ <div class=card><b>Overall drawing progress</b>${bar(tot)}</div>
+ <div class=two><div class=card><h2 style="margin-top:0">Ongoing Projects</h2>${cl.filter(c=>c.status=='Ongoing').map(c=>`<div class=row><a href="#project-${c.id}">${E(c.project)}</a> <small>${E(c.type)} · ${E(tm(c.team))}</small>${bar(pr(c.id))}</div>`).join('')||'<small>None</small>'}</div>
+ <div><div class=card><h2 style="margin-top:0" class=neg>Overdue</h2>${ov.map(li).join('')||'<small>Nothing overdue</small>'}</div><div class=card><h2 style="margin-top:0">Upcoming Deadlines</h2>${up.map(li).join('')||'<small>No deadlines in the next 14 days</small>'}</div></div></div>`}
+function vClients(){return `<div class=hd><h1>Projects &amp; Clients</h1><button class=btn onclick="editClient()">+ New Client / Project</button></div>
+ <div class=tb><input id=q placeholder="Search client or project…" oninput=fl() value="${E(F.q||'')}"><select id=ft onchange=fl()>${op([['','All types'],...TY],F.ft||'')}</select><select id=fs onchange=fl()>${op([['','All statuses'],...PS],F.fs||'')}</select><select id=fm onchange=fl()>${op([['','All team members'],...db.team.map(t=>[t.id,t.name])],F.fm||'')}</select><select id=so onchange=fl()>${op([['name','Sort: Project name'],['progress','Sort: Progress'],['deadline','Sort: Next deadline'],['start','Sort: Start date']],F.so||'name')}</select></div><div class=card id=out></div>`}
+function fl(){F.q=$('#q').value;F.ft=$('#ft').value;F.fs=$('#fs').value;F.fm=$('#fm').value;F.so=$('#so').value;
+ const nd=c=>db.drawings.filter(d=>d.pid==c.id&&pend(d)&&d.target).map(d=>d.target).sort()[0]||'';
+ const L=db.clients.filter(c=>(!F.q||(c.name+c.project).toLowerCase().includes(F.q.toLowerCase()))&&(!F.ft||c.type==F.ft)&&(!F.fs||c.status==F.fs)&&(!F.fm||c.team==F.fm));
+ L.sort((a,b)=>F.so=='progress'?pr(b.id)-pr(a.id):F.so=='deadline'?(nd(a)||'9').localeCompare(nd(b)||'9'):F.so=='start'?b.start.localeCompare(a.start):a.project.localeCompare(b.project));
+ $('#out').innerHTML=`<div class=tw><table><tr><th>Project</th><th>Client</th><th>Type</th><th>Team</th><th>Status</th><th style="min-width:130px">Progress</th><th>Next deadline</th></tr>${L.map(c=>`<tr onclick="location.hash='project-${c.id}'" style=cursor:pointer><td><b>${E(c.project)}</b></td><td>${E(c.name)}<br><small>${E(c.phone)}</small></td><td>${c.type}</td><td>${E(tm(c.team))}</td><td><span class=badge>${c.status}</span></td><td>${bar(pr(c.id))}</td><td>${fmt(nd(c))}</td></tr>`).join('')||'<tr><td colspan=7>No projects found</td></tr>'}</table></div>`}
+const stSel=d=>`<select style="border-left:4px solid ${SC[d.status]}" onchange="up('${d.id}','status',this.value)">${op(ST,d.status)}</select>`;
+function drow(d,sp){return `<tr><td><b>${E(d.name)}</b>${d.rev?`<br><small class=neg>Rev: ${E(d.rev)}</small>`:''}${d.rem?`<br><small>${E(d.rem)}</small>`:''}</td>${sp?`<td><a href="#project-${d.pid}">${E(proj(d.pid).project)}</a><br><small>${E(d.cat)}</small></td>`:''}<td>${stSel(d)}</td><td><select onchange="up('${d.id}','team',this.value)">${op(tO(),d.team)}</select></td><td><input type=date value="${d.target}" class="${over(d)?'neg':''}" onchange="up('${d.id}','target',this.value)"></td><td>${fmt(d.done)}</td><td><button class="btn ghost sm" onclick="editDr('${d.id}')">Edit</button></td></tr>`}
+const dh=sp=>`<tr><th>Drawing</th>${sp?'<th>Project</th>':''}<th>Status</th><th>Team</th><th>Target date</th><th>Completed</th><th></th></tr>`;
+function up(id,k,v){const d=db.drawings.find(x=>x.id==id);d[k]=v;if(k=='status'){if(done(d)&&!d.done)d.done=T;if(!done(d))d.done='';if(v!='Not Started'&&!d.start)d.start=T}save();render()}
+function vProj(id){const p=proj(id);if(!p)return '<p>Project not found. <a href="#clients">Back</a></p>';
+ const D=db.drawings.filter(d=>d.pid==id),pc=pr(id),L=D.filter(d=>!F.ps||d.status==F.ps),cats=[...new Set(L.map(d=>d.cat))],pd=D.filter(pend),cd=D.filter(done);
+ return `<div class=hd><div><a href="#clients">← All projects</a><h1>${E(p.project)}</h1></div><div><button class="btn ghost" onclick="editClient('${id}')">Edit</button> <button class=btn onclick="editDr(null,'${id}')">+ Drawing</button> <button class="btn ghost" onclick="print()">Print / PDF</button></div></div>
+ <div class="card info"><div><small>Client</small>${E(p.name)}</div><div><small>Phone</small>${E(p.phone)}</div><div><small>Email</small>${E(p.email)}</div><div><small>Location</small>${E(p.address)}</div><div><small>Type</small>${p.type}</div><div><small>Start date</small>${fmt(p.start)}</div><div><small>Team member</small>${E(tm(p.team))}</div><div><small>Status</small>${p.status}</div></div>
+ <div class=card><b>Overall progress — ${cd.length} of ${D.length} drawings completed</b>${bar(pc)}</div>
+ <div class=two><div class=card><b>Pending work (${pd.length})</b><br>${pd.map(d=>`<span class="chip ${over(d)?'bad':''}">${E(d.name)}</span>`).join('')||'<small>All done</small>'}</div><div class=card><b>Completed work (${cd.length})</b><br>${cd.map(d=>`<span class=chip>${E(d.name)}</span>`).join('')||'<small>None yet</small>'}<br><br><b>Upcoming deadlines</b>${pd.filter(d=>d.target).sort(by('target')).slice(0,4).map(d=>`<div class=row>${E(d.name)} <small class="${over(d)?'neg':''}">${fmt(d.target)}</small></div>`).join('')||'<br><small>None set</small>'}</div></div>
+ <div class=hd><h2 style="margin:0">Drawing Checklist</h2><select style="width:auto" onchange="F.ps=this.value;render()">${op([['','All statuses'],...ST],F.ps||'')}</select></div>
+ ${cats.map(c=>{const x=D.filter(d=>d.cat==c);return `<div class=card><b>${E(c)}</b> <small>${x.filter(done).length}/${x.length} done</small><div class=tw><table>${dh()}${L.filter(d=>d.cat==c).map(d=>drow(d)).join('')}</table></div></div>`}).join('')||'<div class=card><small>No drawings match.</small></div>'}
+ <div class=card><b>Project notes &amp; updates</b><p>${E(p.notes)||'<small>No notes</small>'}</p>${(p.updates||[]).slice().reverse().map(u=>`<div class=row><small>${fmt(u.d)}</small> ${E(u.t)}</div>`).join('')}<div class=tb style="margin-top:10px"><input id=nu placeholder="Add an update…"><button class=btn onclick="addUpd('${id}')">Add</button></div></div>`}
+function addUpd(id){const t=$('#nu').value.trim();if(!t)return;const p=proj(id);(p.updates=p.updates||[]).push({d:T,t});save();render()}
+function vDraw(){return `<div class=hd><h1>Drawings</h1></div><div class=tb><input id=dq placeholder="Search drawings…" oninput=fd() value="${E(F.dq||'')}"><select id=dp onchange=fd()>${op([['','All projects'],...db.clients.map(c=>[c.id,c.project])],F.dp||'')}</select><select id=ds onchange=fd()>${op([['','All statuses'],...ST],F.ds||'')}</select><select id=dm onchange=fd()>${op([['','All team members'],...db.team.map(t=>[t.id,t.name])],F.dm||'')}</select><select id=dd onchange=fd()>${op([['','Any deadline'],['over','Overdue'],['soon','Next 14 days'],['none','No date set']],F.dd||'')}</select><select id=dso onchange=fd()>${op([['target','Sort: Deadline'],['project','Sort: Project'],['status','Sort: Status']],F.dso||'target')}</select></div><div class=card><div class=tw id=dout></div></div>`}
+function fd(){F.dq=$('#dq').value;F.dp=$('#dp').value;F.ds=$('#ds').value;F.dm=$('#dm').value;F.dd=$('#dd').value;F.dso=$('#dso').value;
+ const L=db.drawings.filter(d=>(!F.dq||d.name.toLowerCase().includes(F.dq.toLowerCase()))&&(!F.dp||d.pid==F.dp)&&(!F.ds||d.status==F.ds)&&(!F.dm||d.team==F.dm)&&(!F.dd||(F.dd=='over'?over(d):F.dd=='soon'?upc(d):!d.target)));
+ L.sort((a,b)=>F.dso=='project'?proj(a.pid).project.localeCompare(proj(b.pid).project):F.dso=='status'?ST.indexOf(a.status)-ST.indexOf(b.status):(a.target||'9').localeCompare(b.target||'9'));
+ $('#dout').innerHTML=`<table>${dh(1)}${L.slice(0,300).map(d=>drow(d,1)).join('')||'<tr><td colspan=7>No drawings found</td></tr>'}</table>`}
+function vTeam(){return `<div class=hd><h1>Team</h1>${isA()?'<button class=btn onclick="editTeam()">+ Add Team Member</button>':''}</div><div class="card tw"><table><tr><th>Name</th><th>Assigned projects</th><th>Pending</th><th>Completed</th><th>Overdue</th><th></th></tr>${db.team.map(t=>{const m=db.drawings.filter(d=>d.team==t.id),ps=[...new Set([...db.clients.filter(c=>c.team==t.id).map(c=>c.id),...m.map(d=>d.pid)])];
+ return `<tr><td><b>${E(t.name)}</b><br><small>${E(t.role)}</small></td><td>${ps.map(i=>`<a class=chip href="#project-${i}">${E(proj(i).project)}</a>`).join('')||'—'}</td><td>${m.filter(pend).length}</td><td>${m.filter(done).length}</td><td class="${m.filter(over).length?'neg':''}">${m.filter(over).length}</td><td>${isA()?`<button class="btn ghost sm" onclick="editTeam('${t.id}')">Edit</button>`:''}</td></tr>`}).join('')}</table></div>`}
+function vData(){return `<div class=hd><h1>Reports &amp; Backup</h1></div><div class="card noprint"><div class=tb><select id=rp onchange=rp()>${op([['','All projects'],...db.clients.map(c=>[c.id,c.project])],'')}</select><button class=btn onclick="print()">Print / Save as PDF</button><button class="btn ghost" onclick="cp('tsv')">Copy for Excel</button></div><textarea id=tsv rows=3 readonly></textarea><small>Copy for Excel puts tab-separated data on your clipboard: paste straight into a sheet.</small></div><div class=card id=rout></div>
+ ${isA()?`<div class="card noprint"><h2 style="margin-top:0">Backup &amp; Recovery</h2><small>The server saves a copy of the whole database every day in its “data/backups” folder (last 30 days kept). You can also download a backup file or restore one here.</small><div class=tb style="margin-top:8px"><a class=btn href="/api/backup" style="text-decoration:none;display:inline-block">Download backup file</a><input id=rf type=file accept=".json" style="max-width:260px"><button class=btn onclick=restore()>Restore from file</button></div><b>Change admin password</b><div class=tb style="margin-top:8px"><input id=np type=password placeholder="New password (6+ characters)"><button class=btn onclick="if($('#np').value)api('/api/admin-password','POST',{p:$('#np').value}).then(()=>{$('#np').value='';$('#msg').textContent='Password updated.'}).catch(()=>{$('#msg').textContent='Password must be at least 6 characters.'})">Update</button></div><b>Go live</b><div class=tb style="margin-top:8px"><button class="btn red" onclick="cf(this,wipe)">Delete ALL data (clear sample data)</button></div><p id=msg class=neg></p></div>`:''}`}
+async function restore(){const f=$('#rf').files[0];if(!f)return;try{await api('/api/restore','POST',JSON.parse(await f.text()));await load();toast('Backup restored')}catch(e){$('#msg').textContent='That is not a valid backup file.'}}
+async function wipe(){try{await api('/api/restore','POST',{clients:[],drawings:[],team:[]});await load();toast('All data cleared')}catch(e){$('#msg').textContent='Could not clear data.'}}
+function rep(pid){const C=db.clients.filter(c=>!pid||c.id==pid);
+ return [[['Project','Client','Type','Team Member','Status','Drawings','Completed','Progress'],...C.map(c=>{const D=db.drawings.filter(d=>d.pid==c.id);return [c.project,c.name,c.type,tm(c.team),c.status,D.length,D.filter(done).length,pr(c.id)+'%']})],
+ [['Project','Category','Drawing','Status','Team Member','Start','Target','Completed','Revision Notes','Remarks'],...db.drawings.filter(d=>!pid||d.pid==pid).map(d=>[proj(d.pid).project,d.cat,d.name,d.status,tm(d.team),d.start,d.target,d.done,d.rev,d.rem])]]}
+const tbl=r=>`<div class=tw><table><tr>${r[0].map(h=>`<th>${h}</th>`).join('')}</tr>${r.slice(1).map(x=>`<tr>${x.map(v=>`<td>${E(v)}</td>`).join('')}</tr>`).join('')}</table></div>`;
+function rp(){const [a,b]=rep($('#rp').value);$('#rout').innerHTML=`<h2 style="margin-top:0">ARORA ARCHITECTURAL STUDIOS — Progress Report, ${fmt(T)}</h2>${tbl(a)}<h2>Drawing Status</h2>${tbl(b)}`;
+ $('#tsv').value=[a,b].map(r=>r.map(x=>x.map(v=>String(v??'').replace(/\s+/g,' ')).join('\t')).join('\n')).join('\n\n')}
+function cp(id){const t=$('#'+id);t.select();try{navigator.clipboard.writeText(t.value)}catch(e){}try{document.execCommand('copy')}catch(e){}}
+function restore(){try{const o=JSON.parse($('#rs').value);if(!o.clients||!o.drawings||!o.team)throw 0;db=o;save();render()}catch(e){$('#msg').textContent='That is not a valid backup.'}}
+function autoRestore(){try{const b=JSON.parse(ls(B));db=b.data;save();render()}catch(e){$('#msg').textContent='No auto-backup found.'}}
+function form(title,fields,cb,del){FM={fields,cb};
+ $('#m').innerHTML=`<h2 style="margin-top:0">${title}</h2><div class=fg>${fields.map(f=>`<label class="${f.w?'w':''}">${f.l}${f.t=='select'?`<select id=f_${f.k}>${op(f.o,f.v)}</select>`:f.t=='textarea'?`<textarea id=f_${f.k} rows=2>${E(f.v)}</textarea>`:`<input id=f_${f.k} type="${f.t||'text'}" value="${E(f.v)}"${f.k=='cat'?' list=dl':''}>`}</label>`).join('')}</div><div class=act>${del?`<button class="btn red" onclick="${del}">Delete</button>`:''}<span></span><button class="btn ghost" onclick="$('#m').close()">Cancel</button><button class=btn onclick=sub()>Save</button></div>`;$('#m').showModal()}
+function sub(){const o={};for(const f of FM.fields){o[f.k]=$('#f_'+f.k).value.trim();if(f.r&&!o[f.k]){$('#f_'+f.k).style.borderColor='var(--red)';return}}FM.cb(o);$('#m').close();render()}
+function cf(b,f){if(b.dataset.c)return f();b.dataset.c=1;const t=b.textContent;b.textContent='Click again to confirm';setTimeout(()=>{b.textContent=t;delete b.dataset.c},3500)}
+function editClient(id){const c=id?proj(id):{type:'Residential',status:'Ongoing',start:T,team:''};
+ form(id?'Edit Client / Project':'New Client / Project',[{k:'name',l:'Client Name',v:c.name,r:1},{k:'phone',l:'Contact Number',v:c.phone},{k:'email',l:'Email Address',v:c.email},{k:'project',l:'Project Name',v:c.project,r:1},{k:'address',l:'Project Address / Location',v:c.address,w:1},{k:'type',l:'Project Type',t:'select',o:TY,v:c.type},{k:'status',l:'Project Status',t:'select',o:PS,v:c.status},{k:'start',l:'Project Start Date',t:'date',v:c.start},{k:'team',l:'Assigned Team Member',t:'select',o:tO(),v:c.team},{k:'notes',l:'Additional Notes',t:'textarea',v:c.notes,w:1}],
+ o=>{if(id)Object.assign(c,o);else{Object.assign(c,o,{id:uid(),updates:[]});db.clients.push(c);addDr(c);location.hash='project-'+c.id}save()},
+ id&&isA()?`cf(this,()=>delC('${id}'))`:'')}
+function delC(id){db.clients=db.clients.filter(c=>c.id!=id);db.drawings=db.drawings.filter(d=>d.pid!=id);save();$('#m').close();location.hash='clients';render()}
+function editDr(id,pid){const d=id?db.drawings.find(x=>x.id==id):{pid,cat:'',name:'',status:'Not Started',team:proj(pid).team,start:T,target:'',done:'',rev:'',rem:''};
+ form(id?'Edit Drawing':'Add Drawing',[{k:'cat',l:'Category (pick or type a new one)',v:d.cat,r:1},{k:'name',l:'Drawing Name',v:d.name,r:1},{k:'status',l:'Status',t:'select',o:ST,v:d.status},{k:'team',l:'Assigned Team Member',t:'select',o:tO(),v:d.team},{k:'start',l:'Start Date',t:'date',v:d.start},{k:'target',l:'Target Submission Date',t:'date',v:d.target},{k:'done',l:'Actual Completion Date',t:'date',v:d.done},{k:'rev',l:'Revision Notes',t:'textarea',v:d.rev,w:1},{k:'rem',l:'Remarks',t:'textarea',v:d.rem,w:1}],
+ o=>{Object.assign(d,o);if(!id)Object.assign(d,{id:uid()}),db.drawings.push(d);if(done(d)&&!d.done)d.done=T;save()},id?`cf(this,()=>delD('${id}'))`:'')}
+function delD(id){db.drawings=db.drawings.filter(d=>d.id!=id);save();$('#m').close();render()}
+function editTeam(id){const t=id?db.team.find(x=>x.id==id):{};
+ form(id?'Edit Team Member':'Add Team Member',[{k:'name',l:'Name',v:t.name,r:1},{k:'role',l:'Role',v:t.role},{k:'u',l:'Login Username',v:t.u},{k:'p',l:'Login Password (blank = keep current)',v:''}],o=>{if(!o.p)delete o.p;if(id)Object.assign(t,o);else db.team.push(Object.assign(o,{id:uid()}));save()},id?`cf(this,()=>delT('${id}'))`:'')}
+function delT(id){db.team=db.team.filter(t=>t.id!=id);db.clients.forEach(c=>{if(c.team==id)c.team=''});db.drawings.forEach(d=>{if(d.team==id)d.team=''});save();$('#m').close();render()}
+init();
+</script></body></html>
