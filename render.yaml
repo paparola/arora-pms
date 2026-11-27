@@ -1,1 +1,22 @@
-
+services:
+  - type: web
+    name: arora-pms
+    runtime: node
+    plan: starter
+    region: singapore
+    buildCommand: npm install
+    startCommand: node server.js
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: "22"
+      - key: DATA_DIR
+        value: /data
+      - key: ADMIN_PASSWORD
+        sync: false
+    disk:
+      name: arora-data
+      mountPath: /data
+      sizeGB: 1
